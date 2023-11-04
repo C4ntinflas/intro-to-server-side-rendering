@@ -13,7 +13,7 @@ app.use(express.static('public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jsx');
 app.engine('jsx', require('express-react-views').createEngine());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
 // ROUTES
@@ -37,9 +37,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', () => {
   console.log('Connected to MongoDB!');
 
-// LISTEN
-app.listen(PORT, () => {
-  console.log('listening on port', PORT);
+  // LISTEN
+  app.listen(PORT, () => {
+    console.log('listening on port', PORT);
   });
 });
-
