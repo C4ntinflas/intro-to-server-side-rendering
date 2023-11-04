@@ -1,6 +1,7 @@
 // DEPENDENCIES
 const express = require('express');
 const methodOverride = require('method-override');
+const mongoose = require('mongoose');
 
 // CONFIGURATION
 require('dotenv').config();
@@ -29,7 +30,16 @@ app.get('*', (req, res) => {
   res.send('404');
 });
 
+mongoose.connect(process.env.MONGO_URI);
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB!');
+
 // LISTEN
 app.listen(PORT, () => {
   console.log('listening on port', PORT);
+  });
 });
+
